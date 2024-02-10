@@ -1,4 +1,5 @@
 import { Doc, Block } from "./ast";
+import { parse } from "./parse";
 import { renderDjot } from "./djot-renderer";
 
 const cicero  = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis superlongunbreakablewordthatwontfitononeline."
@@ -435,5 +436,20 @@ etc.
 |g|h|
 `);
    });
+
+   const readme = `# djot.js
+
+A library and command-line tool for parsing and
+rendering the light markup format [djot](https://djot.net).\n`
+
+   it("omit auto generated attributes and references",()=>{
+    expect(renderDjot(parse(readme))).toEqual(readme)
+   })
+
+   it("keep original attributes and references",()=>{
+    expect(renderDjot(parse(
+            `{#djot-js}\n`+readme+`\n\n[djot.js]: #djot-js\n`
+    ))).toEqual(`{#djot-js}\n`+readme+`\n\n[djot.js]: #djot-js\n`)
+   })
 
 });
