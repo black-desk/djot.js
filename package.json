@@ -1,7 +1,7 @@
 {
   "name": "@djot/djot",
   "sideEffects": false,
-  "version": "0.2.5",
+  "version": "0.3.1",
   "engines": {
     "node": ">=17.0.0"
   },
@@ -17,7 +17,8 @@
   "exports": {
     ".": {
       "require": "./dist/djot.js",
-      "default": "./lib/index.js"
+      "default": "./lib/index.js",
+      "types": "./types/index.d.ts"
     }
   },
   "bin": {
@@ -31,7 +32,7 @@
     "build": "tsc && webpack",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "test": "npx jest",
+    "test": "jest",
     "bench": "npm run build && node ./bench/bench.js"
   },
   "files": [
@@ -40,8 +41,7 @@
     "./types/*.d.ts",
     "./doc/djot.1"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.2.4",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
